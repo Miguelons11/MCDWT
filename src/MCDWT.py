@@ -120,12 +120,12 @@ class MCDWT:
         x = 2
         for t in range(I): # Temporal scale
             i = 0
-            aL, aH = decomposition.read(prefix, "{:03d}".format(0))
+            aL, aH = decomposition.read(prefix, "sintel_trailer_2k_{:04d}".format(0))
             while i < (N//x):
-                bL, bH = decomposition.read(prefix, "{:03d}".format(x*i+x//2))
-                cL, cH = decomposition.read(prefix, "{:03d}".format(x*i+x))
+                bL, bH = decomposition.read(prefix, "sintel_trailer_2k_{:04d}".format(x*i+x//2))
+                cL, cH = decomposition.read(prefix, "sintel_trailer_2k_{:04d}".format(x*i+x))
                 residue_bH = self.__forward_butterfly(aL, aH, bL, bH, cL, cH)
-                decomposition.writeH(residue_bH, prefix, "{:03d}".format(x*i+x//2))
+                decomposition.writeH(residue_bH, prefix, "sintel_trailer_2k_{:04d}".format(x*i+x//2))
                 aL, aH = cL, cH
                 i += 1
             x *= 2
@@ -163,12 +163,12 @@ class MCDWT:
         x = 2**I
         for t in range(I): # Temporal scale
             i = 0
-            aL, aH = decomposition.read(prefix, "{:03d}".format(0))
+            aL, aH = decomposition.read(prefix, "sintel_trailer_2k_{:04d}".format(0))
             while i < (N//x):
-                bL, residue_bH = decomposition.read(prefix, "{:03d}".format(x*i+x//2))
-                cL, cH = decomposition.read(prefix, "{:03d}".format(x*i+x))
+                bL, residue_bH = decomposition.read(prefix, "sintel_trailer_2k_{:04d}".format(x*i+x//2))
+                cL, cH = decomposition.read(prefix, "sintel_trailer_2k_{:04d}".format(x*i+x))
                 bH = self.__backward_butterfly(aL, aH, bL, residue_bH, cL, cH)
-                decomposition.writeH(bH, prefix, "{:03d}".format(x*i+x//2))
+                decomposition.writeH(bH, prefix, "sintel_trailer_2k_{:04d}".format(x*i+x//2))
                 aL, aH = cL, cH
                 i += 1
             x //=2

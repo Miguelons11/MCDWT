@@ -36,10 +36,10 @@ class MDWT:
             (disk): the sequence of decompositions.
 
         '''
-        for i in range(N):
-            img = image.read(prefix, "{:03d}".format(i))
+        for i in range(1,N):
+            img = image.read(prefix, "sintel_trailer_2k_{:04d}".format(i))
             pyr = self.dwt.forward(img)
-            decomposition.write(pyr, prefix, "{:03d}".format(i))
+            decomposition.write(pyr, prefix,"sintel_trailer_2k_{:04d}".format(i))
 
     def backward(self, prefix="/tmp/", N=5):
         '''1-iteration Inverse Motion 2D DWT of a sequence of decompositions.
